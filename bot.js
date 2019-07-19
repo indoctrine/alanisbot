@@ -12,19 +12,20 @@ const auth = require('./auth.json');
 const fs = require('fs');
 const ironic = require('./ironic.json');
 const bot = new Discord.Client();
+const path = "/var/www/html/alanisbot/";
 var hacktriggers;
 var hackattempts = 0;
 var hackdifficulty = 10;    // 0=guaranteed(1attempt) 1=testing(<10attempts) 5=easy(~25attempts) 10=normal(~35attempts) 20=hard(~50attempts) 40=TheGibson(~70attempts) (d100 is 50% chance with ~70 attempts)
 
 function readFileSync(filePath) {
     var options = {encoding:'utf-8', flag:'r'};
-    var buffer = fs.readFileSync(filePath, options);
+    var buffer = fs.readFileSync(path + filePath, options);
     return buffer;
 }
 
 function writeFileSync(filePath, content) {
     var options = {encoding:'utf-8', flag:'w'};
-    fs.writeFileSync(filePath, content, options);
+    fs.writeFileSync(path + filePath, content, options);
 }
 
 bot.on('ready', () => {
@@ -78,5 +79,9 @@ bot.on('message', (message) => {
 
 bot.login(auth.token);
 bot.on('disconnect', function(errMsg, code) {
+  bot.login(auth.token);
+});
+bot.on('error', function(console_error){
+  console.log(console_error);
   bot.login(auth.token);
 });
