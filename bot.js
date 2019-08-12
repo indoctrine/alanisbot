@@ -23,14 +23,14 @@ function readFileSync(filePath) {
     return buffer;
 }
 
-function writeFileSync(filePath, content) {
-    var options = {encoding:'utf-8', flag:'w'};
+function writeFileSync(filePath, content, flag = 'w') {
+    var options = {encoding:'utf-8', flag: flag};
     fs.writeFileSync(path + filePath, content, options);
 }
 
 bot.on('ready', () => {
-  bot.user.setActivity('Ironic - Alanis Morissette', {type: "LISTENING"});
-  console.log("Connected as " + bot.user.tag);
+  bot.user.setActivity('Ironic - Alanis Morissette', {type: 'LISTENING'});
+  console.log('Connected as ' + bot.user.tag);
 });
 
 bot.on('message', (message) => {
@@ -82,6 +82,7 @@ bot.on('disconnect', function(errMsg, code) {
   bot.login(auth.token);
 });
 bot.on('error', function(console_error){
+  writeFileSync('errors.log', '\n' + console_error, 'a');
   console.log(console_error);
   bot.login(auth.token);
 });
