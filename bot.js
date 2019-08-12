@@ -45,19 +45,19 @@ bot.on('message', (message) => {
     }
 
     else if(message.content.match(/(:<)/i)){
-      hackattempts = readFileSync('hackattempts.txt');
+      hackattempts = readFileSync('db/hackattempts.txt');
       hackattempts++;
-      writeFileSync('hackattempts.txt', hackattempts);
+      writeFileSync('db/hackattempts.txt', hackattempts);
 
       var randompercentage = Math.floor(100 * Math.pow((Math.random()), (hackdifficulty/hackattempts)) + 1);
       if(randompercentage == 100){
-        hacktriggers = readFileSync('hacktriggers.txt');
+        hacktriggers = readFileSync('db/hacktriggers.txt');
         hacktriggers++;
-        writeFileSync('hacktriggers.txt', hacktriggers);
+        writeFileSync('db/hacktriggers.txt', hacktriggers);
         console.log('Hack trigger number ' + hacktriggers + ' triggered in ' + hackattempts + ' tries.');
         message.channel.send('Attempt 0x' + hackattempts + ' successful. Hacking ' + randompercentage + '% complete. Consequences will never be the same, <@64909909052887040> has backtraced your IP and the cyberpolice are on their way.');
         hackattempts = 0;
-        writeFileSync('hackattempts.txt', hackattempts);
+        writeFileSync('db/hackattempts.txt', hackattempts);
       }
 
       else{
@@ -66,7 +66,7 @@ bot.on('message', (message) => {
     }
 
     else if(message.content.match(/(!hax)/i)){
-      hacktriggers = readFileSync('hacktriggers.txt');
+      hacktriggers = readFileSync('db/hacktriggers.txt');
       message.channel.send('<@64909909052887040> has hacked the Gibson ' + hacktriggers + ' times. <:gotem:548663899466235915>');
     }
 
@@ -82,7 +82,7 @@ bot.on('disconnect', function(errMsg, code) {
   bot.login(auth.token);
 });
 bot.on('error', function(console_error){
-  writeFileSync('errors.log', '\n' + console_error, 'a');
+  writeFileSync('log/errors.log', '\n' + console_error, 'a');
   console.log(console_error);
   bot.login(auth.token);
 });
