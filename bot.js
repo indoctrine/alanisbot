@@ -18,14 +18,20 @@ var hackattempts = 0;
 var hackdifficulty = 10;    // 0=guaranteed(1attempt) 1=testing(<10attempts) 5=easy(~25attempts) 10=normal(~35attempts) 20=hard(~50attempts) 40=TheGibson(~70attempts) (d100 is 50% chance with ~70 attempts)
 
 function readFileSync(filePath) {
+    var fullPath = path + filePath;
+    if(!fs.existsSync(fullPath)){
+      fs.writeFileSync(fullPath, '', {encoding:'utf-8', flag:'w'});
+    }
+
     var options = {encoding:'utf-8', flag:'r'};
-    var buffer = fs.readFileSync(path + filePath, options);
+    var buffer = fs.readFileSync(fullPath, options);
     return buffer;
 }
 
 function writeFileSync(filePath, content, flag = 'w') {
+    var fullPath = path + filePath;
     var options = {encoding:'utf-8', flag: flag};
-    fs.writeFileSync(path + filePath, content, options);
+    fs.writeFileSync(fullPath, content, options);
 }
 
 bot.on('ready', () => {
@@ -82,7 +88,7 @@ bot.on('disconnect', function(errMsg, code) {
   bot.login(auth.token);
 });
 bot.on('error', function(console_error){
-  writeFileSync('log/errors.log', '\n' + console_error, 'a');
+  writeFileSync('log/errors.log', '\n' + console_error.message, 'a');
   console.log(console_error);
   bot.login(auth.token);
 });
