@@ -1,11 +1,4 @@
 ._.DS_Store
 .DS_Store
-node_modules/*
 auth.json
-gscredentials.json
-package.json
-package-lock.json
-token.json
-images/*
-log/*
-db/*
+hack_command.json
