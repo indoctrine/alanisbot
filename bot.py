@@ -41,13 +41,13 @@ async def on_message(message):
     if message.author.id is bot.user.id:
         return
     if ':<' in message.content:
-        randompercentage = math.floor(100 * math.pow((random.random()), (hack_data['difficulty']/hack_data['attempts'])) + 1)
+        hack_data['attempts'] += 1
+        randompercentage = math.floor(100 * math.pow((random.random()), (hack_data['difficulty']/hack_data['attempts'])))
         if(randompercentage == 100):
             hack_data['triggers'] += 1
-            await ctx.send(f"Attempt 0x {hack_data['attempts'] + 1} successful. Hacking {randompercentage}% complete. Consequences will never be the same, <@!64909909052887040> has backtraced your IP and the cyberpolice are on their way.");
+            await ctx.send(f"Attempt 0x{hack_data['attempts']} successful. Hacking {randompercentage}% complete. Consequences will never be the same, <@!64909909052887040> has backtraced your IP and the cyberpolice are on their way.");
             hack_data['attempts'] = 0
         else:
-            hack_data['attempts'] += 1
             if randompercentage > 60:
                 await ctx.send(f'<@!64909909052887040> is getting closer... Hacking {randompercentage}% complete.');
             else:
@@ -68,7 +68,7 @@ class Hack_Commands(commands.Cog, name='Hack Commands'):
         self.bot.help_command.cog = self
     @commands.command(help=f"{bot.get_user(64909909052887040)} is a Chinese Hackerman who has backtraced your IP {hack_data['triggers']} times")
     async def hax(self, ctx):
-        await ctx.send(f"Look out, {bot.get_user(64909909052887040)} has hacked the Gibson {hack_data['triggers']} times!")
+        await ctx.send(f"Look out, <@!64909909052887040> has hacked the Gibson {hack_data['triggers']} times!")
 
 bot.add_cog(Hack_Commands(bot))
 
