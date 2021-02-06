@@ -1,4 +1,5 @@
 ._.DS_Store
 .DS_Store
+cogs/__pycache__
 auth.json
 hack_command.json
