@@ -3,3 +3,5 @@
 cogs/__pycache__
 auth.json
 hack_command.json
+._*
+.gitignore

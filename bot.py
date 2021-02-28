@@ -25,7 +25,7 @@ intents.members = True # Intent allows us to get users that haven't been seen ye
 bot = commands.Bot(command_prefix='!', case_insensitive=True, intents=intents)
 bot.ironic_statements = []
 bot.ironic_statements, bot.hack_data, bot.creds = asyncio.get_event_loop().run_until_complete(load_dependencies())
-extensions = ['cogs.hack']
+extensions = ['cogs.hack', 'cogs.dice']
 
 if __name__ == '__main__':
     for extension in extensions:
