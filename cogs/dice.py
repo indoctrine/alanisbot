@@ -9,7 +9,7 @@ class Dice_Commands(commands.Cog, name='Dice Commands'):
         self.bot.help_command.cog = self
     @commands.command(help=f"Roll some dice")
     async def roll(self, ctx, dice):
-        if re.match('^\d+d\d+$', dice):
+        if re.match('^\d{1,2}[dD]\d{1,3}$', dice):
             # dice_types = [2, 4, 6, 8, 10, 12, 20, 100]
             arg = dice.split('d')
             num_dice = int(arg[0])
