@@ -11,7 +11,7 @@ class Dice_Commands(commands.Cog, name='Dice Commands'):
     async def roll(self, ctx, dice):
         if re.match('^\d{1,2}[dD]\d{1,3}$', dice):
             # dice_types = [2, 4, 6, 8, 10, 12, 20, 100]
-            arg = dice.split('d')
+            arg = re.split('d', dice, flags=re.IGNORECASE)
             num_dice = int(arg[0])
             dice_type = int(arg[1])
             rolls = []
