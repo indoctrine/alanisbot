@@ -17,7 +17,8 @@ class Dice_Commands(commands.Cog, name='Dice Commands'):
             rolls = []
             for i in range(0, num_dice):
                 rolls.append(random.randint(1, dice_type))
-            await ctx.send(f'Rolling {dice} \nResults: {", ".join(str(x) for x in rolls)}')
+            roll_sum = sum(rolls)
+            await ctx.send(f'Rolling {dice} \nResults: {", ".join(str(x) for x in rolls)}\n{("Sum: " + str(roll_sum)) if num_dice > 1 else ""}')
         else:
             await ctx.send('Please specify a valid dice type')
 def setup(bot):
